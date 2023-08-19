@@ -9,6 +9,7 @@ const AboutPage = () => {
   <AboutBackground src="/Users/mac/Final-project/Final-Project/client/src/pictures/cover.jpg" alt="About Us" />
       <AboutContent>
         <AboutTitle>About Us</AboutTitle>
+        
         <AboutText>
           Food Eats is a revolutionary platform that celebrates the joy of
           culinary exploration. Our mission is to connect passionate food
