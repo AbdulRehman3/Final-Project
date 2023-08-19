@@ -10,6 +10,7 @@ import Drinks from "./Drinks";
 import DrinksDetails from "./DrinksDetails";
 
 const App = () => {
+  
   return (
     <BrowserRouter>
     <NavBar/>
