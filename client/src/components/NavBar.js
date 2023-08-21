@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useAuth } from '../context/AuthContext';
 
 const NavBar = () => {
-	const { user } = useAuth();
+	const { user, logout } = useAuth();
 
 	return (
 		<NavbarWrapper>
@@ -11,20 +11,20 @@ const NavBar = () => {
 				<LogoImage src='/assets/images/applogo.png' alt='Logo' />
 			</Link>
 			<NavigationLeft>
-				<NavItem to='/meals'>MEALS</NavItem>
-				<NavItem to='/Drinks'>DRINKS</NavItem>
+				<NavItem to='/'>Foods List</NavItem>
+				<NavItem to='/'>My Posts</NavItem>
 			</NavigationLeft>
 
 			<NavigationRight>
 				{user ? (
 					<>
-						<p>Hi, {user.fullname}</p>
-						<NavItem to='/signin'>LOGOUT</NavItem>
+						<LoggedInUserName>Hi, {user.fullname}</LoggedInUserName>
+						<LogoutButton onClick={logout}>Logout</LogoutButton>
 					</>
 				) : (
-					<NavItem to='/signin'>SIGN IN</NavItem>
+					<NavItem to='/signin'>Sign In</NavItem>
 				)}
-				<NavItem to='/contactus'>CONTACT US</NavItem>
+				<NavItem to='/contactus'>Contact Us</NavItem>
 			</NavigationRight>
 		</NavbarWrapper>
 	);
@@ -37,6 +37,7 @@ const NavbarWrapper = styled.div`
 	align-items: center;
 	width: 100%;
 	padding: 0 0px; /* Adjusted padding */
+	text-transform: uppercase;
 `;
 
 const NavigationBar = styled.div`
@@ -67,7 +68,25 @@ const NavItem = styled(Link)`
 	transition: color 0.3s, transform 0.3s;
 
 	&:hover {
-		color: Black;
+		text-decoration: underline;
+		transform: translateY(-2px) scale(1.1);
+	}
+`;
+const LoggedInUserName = styled.p`
+	font-size: 14px;
+`;
+const LogoutButton = styled.button`
+	background-color: transparent;
+	border: 0;
+	text-decoration: none;
+	text-transform: unset;
+	font-size: 14px; /* Slightly smaller font size */
+	color: black;
+	text-decoration: none;
+	margin-left: 30px; /* Reduced margin */
+	transition: color 0.3s, transform 0.3s;
+	cursor: pointer;
+	&:hover {
 		text-decoration: underline;
 		transform: translateY(-2px) scale(1.1);
 	}

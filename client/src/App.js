@@ -9,6 +9,7 @@ import MealsDetails from './pages/MealsDetails';
 import Drinks from './pages/Drinks';
 import DrinksDetails from './pages/DrinksDetails';
 import { AuthProvider } from './context/AuthContext';
+import PageNotFound from './pages/PageNotFound';
 
 const App = () => {
 	return (
@@ -27,7 +28,7 @@ const App = () => {
 						path='/confirmationOrder/:orderId'
 						element={<ConfirmationOrder />}
 					/>
-					<Route path='' element={<h1>404: Oops!</h1>} />
+					<Route path='*' element={<PageNotFound />} />
 				</Routes>
 			</AuthProvider>
 		</BrowserRouter>
