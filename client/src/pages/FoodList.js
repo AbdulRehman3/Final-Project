@@ -59,7 +59,7 @@ const FoodList = () => {
 			<StyledDiv>
 				<StyledSectionTitle>Meals</StyledSectionTitle>
 				<ListContainer>
-					{mealsList.map((food, index) => (
+					{mealsList.map((food) => (
 						<FoodCard key={food._id} {...food} />
 					))}
 
@@ -78,8 +78,8 @@ const FoodList = () => {
 			<StyledDiv>
 				<StyledSectionTitle>Drinks</StyledSectionTitle>
 				<ListContainer>
-					{drinksList.map((food, index) => (
-						<FoodCard key={index} {...food} />
+					{drinksList.map((food) => (
+						<FoodCard key={food._id} {...food} />
 					))}
 
 					{(drinksLoading || drinksList.length == 0) && (

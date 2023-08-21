@@ -16,7 +16,7 @@ const NotFoundContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: calc(100vh - 65px);
-	background-color: #f4f4f4;
+	background-color: #f8f9fa;
 `;
 
 const Title = styled.h1`

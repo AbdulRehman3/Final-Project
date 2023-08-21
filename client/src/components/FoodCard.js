@@ -12,6 +12,8 @@ const FoodCard = ({
 	description,
 	price,
 	isAvailable,
+	hideOrderAction,
+	hideUser,
 }) => {
 	const parsedDateTime = useMemo(() => {
 		const dateTime = new Date(createdAt);
@@ -31,9 +33,11 @@ const FoodCard = ({
 					<VeganBadge>Vegan Friendly</VeganBadge>
 				)}
 			</FoodName>
-			<Label>
-				Posted By: <span>{postedBy?.fullname}</span>
-			</Label>
+			{!hideUser && (
+				<Label>
+					Posted By: <span>{postedBy?.fullname}</span>
+				</Label>
+			)}
 			<Label>
 				Posted On: <span>{parsedDateTime}</span>
 			</Label>
@@ -41,7 +45,7 @@ const FoodCard = ({
 			<FoodPrice>Price: ${price}</FoodPrice>
 			<ActionButtonContainer>
 				<DetailButton to={`/foods/detail/${_id}`}>View Detail</DetailButton>
-				{isAvailable && (
+				{isAvailable && !hideOrderAction && (
 					<OrderButton to={`/order/${_id}`}>Order Now</OrderButton>
 				)}
 			</ActionButtonContainer>
