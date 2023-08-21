@@ -44,16 +44,16 @@ exports.signin = (req, res) => {
 				// For security reason, don't expose that the user isn't found
 				return res
 					.status(401)
-					.json({ message: 'The provided username or password is incorrect!' });
+					.json({ error: 'The provided username or password is incorrect!' });
 			}
 			bcrypt.compare(password, user.password, (err, isPasswordValid) => {
 				if (err) {
-					return res.status(500).json({ message: err.message });
+					return res.status(500).json({ error: err.message });
 				}
 
 				if (!isPasswordValid) {
 					return res.status(401).json({
-						message: 'The provided username or password is incorrect!',
+						error: 'The provided username or password is incorrect!',
 					});
 				}
 				const token = jwt.sign(
