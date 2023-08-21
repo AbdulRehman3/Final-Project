@@ -55,67 +55,58 @@ const FoodDetail = () => {
 
 	return (
 		<StyledContainer>
-			<StyledDiv>
-				<SectionHeader>
-					<HeaderBackLink onClick={onGoBack}>Go Back</HeaderBackLink>
-					<StyledSectionTitle>Food Detail</StyledSectionTitle>
-				</SectionHeader>
-				<ListContainer>
-					{foodData && (
-						<FoodItem>
-							<FoodName>
-								{foodData.name}{' '}
-								{foodData.isVegetarian && foodData.foodType === 'meal' && (
-									<VeganBadge>Vegan Friendly</VeganBadge>
-								)}
-							</FoodName>
-							<Label>
-								Posted By: <span>{foodData.postedBy?.fullname}</span>
-							</Label>
-							<Label>
-								Posted On: <span>{parsedDateTime}</span>
-							</Label>
-							<FoodDescription>{foodData.description}</FoodDescription>
-							<FoodPrice>Price: ${foodData.price}</FoodPrice>
-							<ActionButtonContainer>
-								{foodData.isAvailable && !foodData.isSelfPost && (
-									<OrderButton to={`/order/${foodData._id}`}>
-										Order Now
-									</OrderButton>
-								)}
-							</ActionButtonContainer>
-							{!foodData.isAvailable && <SoldOutBadge>Sold Out</SoldOutBadge>}
-						</FoodItem>
-					)}
+			<SectionHeader>
+				<HeaderBackLink onClick={onGoBack}>Go Back</HeaderBackLink>
+				<StyledSectionTitle>Food Detail</StyledSectionTitle>
+			</SectionHeader>
+			{foodData && (
+				<FoodItem>
+					<FoodName>
+						{foodData.name}{' '}
+						{foodData.isVegetarian && foodData.foodType === 'meal' && (
+							<VeganBadge>Vegan Friendly</VeganBadge>
+						)}
+					</FoodName>
+					<Label>
+						Posted By: <span>{foodData.postedBy?.fullname}</span>
+					</Label>
+					<Label>
+						Posted On: <span>{parsedDateTime}</span>
+					</Label>
+					<FoodDescription>{foodData.description}</FoodDescription>
+					<FoodPrice>Price: ${foodData.price}</FoodPrice>
+					<ActionButtonContainer>
+						{foodData.isAvailable && !foodData.isSelfPost && (
+							<OrderButton to={`/order/${foodData._id}`}>Order Now</OrderButton>
+						)}
+					</ActionButtonContainer>
+					{!foodData.isAvailable && <SoldOutBadge>Sold Out</SoldOutBadge>}
+				</FoodItem>
+			)}
 
-					{(foodDataLoading || !foodData) && (
-						<LoadingContainer>
-							{foodDataLoading && <LoadingSpinner />}
-							{!foodDataLoading && !foodData && (
-								<EmptyErrorContainer>
-									<EmptyErrorTitle>Oops!</EmptyErrorTitle>
-									<EmptyError>
-										Could not found any record with this data.
-									</EmptyError>
-									<ErrorActionsContainer>
-										<ErrorBackActions onClick={onGoBack}>
-											Go Back
-										</ErrorBackActions>
-										<ErrorRetryActions onClick={loadFoodData}>
-											Retry
-										</ErrorRetryActions>
-									</ErrorActionsContainer>
-								</EmptyErrorContainer>
-							)}
-						</LoadingContainer>
+			{(foodDataLoading || !foodData) && (
+				<LoadingContainer>
+					{foodDataLoading && <LoadingSpinner />}
+					{!foodDataLoading && !foodData && (
+						<EmptyErrorContainer>
+							<EmptyErrorTitle>Oops!</EmptyErrorTitle>
+							<EmptyError>
+								Could not found any record with this data.
+							</EmptyError>
+							<ErrorActionsContainer>
+								<ErrorBackActions onClick={onGoBack}>Go Back</ErrorBackActions>
+								<ErrorRetryActions onClick={loadFoodData}>
+									Retry
+								</ErrorRetryActions>
+							</ErrorActionsContainer>
+						</EmptyErrorContainer>
 					)}
-				</ListContainer>
-			</StyledDiv>
+				</LoadingContainer>
+			)}
 		</StyledContainer>
 	);
 };
 
-const StyledDiv = styled.div``;
 const StyledContainer = styled.div`
 	padding: 1rem;
 `;
@@ -151,13 +142,6 @@ const EmptyErrorTitle = styled.h2`
 	text-align: center;
 `;
 const EmptyError = styled.p``;
-const ListContainer = styled.div`
-	display: flex;
-	gap: 16px;
-	flex-wrap: wrap;
-	padding: 1rem 0;
-`;
-
 const ErrorActionsContainer = styled.div`
 	text-align: center;
 `;
@@ -188,13 +172,15 @@ const FoodItem = styled.div`
 	border-radius: 8px;
 	position: relative;
 	overflow: hidden;
-	width: 100%;
 `;
 
 const FoodName = styled.h3`
 	margin-top: 0;
 	margin-bottom: 10px;
 	font-size: 16px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
 `;
 
 const VeganBadge = styled.span`
@@ -227,15 +213,6 @@ const ActionButtonContainer = styled.div`
 	font-size: 12px;
 	font-weight: bold;
 	text-transform: uppercase;
-`;
-const DetailButton = styled(Link)`
-	background-color: transparent;
-	border: 1px solid #4caf50;
-	padding: 4px 8px;
-	color: #4caf50;
-	cursor: pointer;
-	text-decoration: none;
-	margin-right: 10px;
 `;
 
 const OrderButton = styled(Link)`

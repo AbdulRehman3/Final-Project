@@ -28,7 +28,7 @@ const FoodCard = ({
 	return (
 		<FoodItem>
 			<FoodName>
-				{name}{' '}
+				<FoodTitle>{name} </FoodTitle>
 				{isVegetarian && foodType === 'meal' && (
 					<VeganBadge>Vegan Friendly</VeganBadge>
 				)}
@@ -67,8 +67,18 @@ const FoodName = styled.h3`
 	margin-top: 0;
 	margin-bottom: 10px;
 	font-size: 16px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
 `;
 
+const FoodTitle = styled.span`
+	white-space: nowrap;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+`;
 const VeganBadge = styled.span`
 	font-size: 10px;
 	padding: 4px 8px;
@@ -82,6 +92,11 @@ const VeganBadge = styled.span`
 const FoodDescription = styled.p`
 	margin: 8px 0;
 	font-size: 14px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	text-overflow: ellipsis;
 `;
 
 const FoodPrice = styled.p`

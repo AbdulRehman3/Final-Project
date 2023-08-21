@@ -66,7 +66,7 @@ const MyPostedFoods = () => {
 			<StyledDiv>
 				<SectionHeader>
 					<StyledSectionTitle>Meals</StyledSectionTitle>
-					<AddFoodLink to='/add-food?foodType:meal'>Add New</AddFoodLink>
+					<AddFoodLink to='/add-food?foodType=meal'>Add New</AddFoodLink>
 				</SectionHeader>
 				<ListContainer>
 					{mealsList.map((food) => (
@@ -93,7 +93,7 @@ const MyPostedFoods = () => {
 			<StyledDiv>
 				<SectionHeader>
 					<StyledSectionTitle>Drinks</StyledSectionTitle>
-					<AddFoodLink to='/add-food?foodType:drink'>Add New</AddFoodLink>
+					<AddFoodLink to='/add-food?foodType=drink'>Add New</AddFoodLink>
 				</SectionHeader>
 				<ListContainer>
 					{drinksList.map((food, index) => (

@@ -36,3 +36,15 @@ export const foodByIdService = (foodId, authToken) => {
 		headers: headers,
 	});
 };
+
+export const addFoodsService = (data, authToken) => {
+	const headers = {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${authToken}`,
+	};
+	return fetch(`${API_URL}/foods/`, {
+		method: 'POST',
+		headers: headers,
+		body: JSON.stringify(data),
+	});
+};
