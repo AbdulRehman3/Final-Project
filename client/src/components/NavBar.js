@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../context/AuthContext';
 
@@ -7,12 +7,12 @@ const NavBar = () => {
 
 	return (
 		<NavbarWrapper>
-			<Link to='/'>
+			<NavLink to='/'>
 				<LogoImage src='/assets/images/applogo.png' alt='Logo' />
-			</Link>
+			</NavLink>
 			<NavigationLeft>
-				<NavItem to='/'>Foods List</NavItem>
-				<NavItem to='/'>My Posts</NavItem>
+				<NavItem to='/foods'>Foods List</NavItem>
+				<NavItem to='/my-listing'>My Posts</NavItem>
 			</NavigationLeft>
 
 			<NavigationRight>
@@ -60,13 +60,17 @@ const NavigationRight = styled(NavigationBar)`
 	margin-right: 20px;
 `;
 
-const NavItem = styled(Link)`
+const NavItem = styled(NavLink)`
 	font-size: 14px; /* Slightly smaller font size */
 	color: black;
 	text-decoration: none;
 	margin-left: 30px; /* Reduced margin */
 	transition: color 0.3s, transform 0.3s;
-
+	&.active {
+		text-decoration: underline;
+		color: #4caf50;
+		font-weight: bold;
+	}
 	&:hover {
 		text-decoration: underline;
 		transform: translateY(-2px) scale(1.1);

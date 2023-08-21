@@ -1,14 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Meals from './pages/Meals';
+
+// Components
+import NavBar from './components/NavBar';
+import { AuthProvider } from './context/AuthContext';
+
+// Pages
+import LandingPage from './pages/LandingPage';
+import FoodList from './pages/FoodList';
+import FoodDetail from './pages/FoodDetail';
+import MyPostedFoods from './pages/MyPostedFoods';
+import AddNewFood from './pages/AddNewFood';
 import Order from './pages/Order';
 import ConfirmationOrder from './pages/ConfirmationOrder';
-import LandingPage from './pages/LandingPage/LandingPage';
-import NavBar from './components/NavBar';
 import SignInForm from './pages/SignInForm';
-import MealsDetails from './pages/MealsDetails';
-import Drinks from './pages/Drinks';
-import DrinksDetails from './pages/DrinksDetails';
-import { AuthProvider } from './context/AuthContext';
 import PageNotFound from './pages/PageNotFound';
 
 const App = () => {
@@ -18,16 +22,16 @@ const App = () => {
 				<NavBar />
 				<Routes>
 					<Route path='/' element={<LandingPage />} />
-					<Route path='/meals' element={<Meals />} />
-					<Route path='/meal/:mealDetails' element={<MealsDetails />} />
-					<Route path='/Drinks' element={<Drinks />} />
-					<Route path='/Drinks/DrinksDetails' element={<DrinksDetails />} />
-					<Route path='/signin' element={<SignInForm />} />
-					<Route path='/order' element={<Order />} />
+					<Route path='/foods' element={<FoodList />} />
+					<Route path='/foods/detail/:foodId' element={<FoodDetail />} />
+					<Route path='/my-listing' element={<MyPostedFoods />} />
+					<Route path='/add-food' element={<AddNewFood />} />
+					<Route path='/order/:foodId' element={<Order />} />
 					<Route
-						path='/confirmationOrder/:orderId'
+						path='/confirmation/:orderId'
 						element={<ConfirmationOrder />}
 					/>
+					<Route path='/signin' element={<SignInForm />} />
 					<Route path='*' element={<PageNotFound />} />
 				</Routes>
 			</AuthProvider>
