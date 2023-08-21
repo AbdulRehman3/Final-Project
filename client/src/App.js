@@ -8,25 +8,28 @@ import SignInForm from './pages/SignInForm';
 import MealsDetails from './pages/MealsDetails';
 import Drinks from './pages/Drinks';
 import DrinksDetails from './pages/DrinksDetails';
+import { AuthProvider } from './context/AuthContext';
 
 const App = () => {
 	return (
 		<BrowserRouter>
-			<NavBar />
-			<Routes>
-				<Route path='/' element={<LandingPage />} />
-				<Route path='/meals' element={<Meals />} />
-				<Route path='/meal/:mealDetails' element={<MealsDetails />} />
-				<Route path='/Drinks' element={<Drinks />} />
-				<Route path='/Drinks/DrinksDetails' element={<DrinksDetails />} />
-				<Route path='/signin' element={<SignInForm />} />
-				<Route path='/order' element={<Order />} />
-				<Route
-					path='/confirmationOrder/:orderId'
-					element={<ConfirmationOrder />}
-				/>
-				<Route path='' element={<h1>404: Oops!</h1>} />
-			</Routes>
+			<AuthProvider>
+				<NavBar />
+				<Routes>
+					<Route path='/' element={<LandingPage />} />
+					<Route path='/meals' element={<Meals />} />
+					<Route path='/meal/:mealDetails' element={<MealsDetails />} />
+					<Route path='/Drinks' element={<Drinks />} />
+					<Route path='/Drinks/DrinksDetails' element={<DrinksDetails />} />
+					<Route path='/signin' element={<SignInForm />} />
+					<Route path='/order' element={<Order />} />
+					<Route
+						path='/confirmationOrder/:orderId'
+						element={<ConfirmationOrder />}
+					/>
+					<Route path='' element={<h1>404: Oops!</h1>} />
+				</Routes>
+			</AuthProvider>
 		</BrowserRouter>
 	);
 };

@@ -1,7 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { useAuth } from '../context/AuthContext';
+
 const NavBar = () => {
+	const { user } = useAuth();
+
 	return (
 		<NavbarWrapper>
 			<Link to='/'>
@@ -13,7 +16,14 @@ const NavBar = () => {
 			</NavigationLeft>
 
 			<NavigationRight>
-				<NavItem to='/signin'>SIGN IN</NavItem>
+				{user ? (
+					<>
+						<p>Hi, {user.fullname}</p>
+						<NavItem to='/signin'>LOGOUT</NavItem>
+					</>
+				) : (
+					<NavItem to='/signin'>SIGN IN</NavItem>
+				)}
 				<NavItem to='/contactus'>CONTACT US</NavItem>
 			</NavigationRight>
 		</NavbarWrapper>
@@ -25,7 +35,6 @@ const NavbarWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 40px; /* Reduced height */
 	width: 100%;
 	padding: 0 0px; /* Adjusted padding */
 `;
@@ -40,7 +49,9 @@ const NavigationLeft = styled(NavigationBar)`
 	margin-left: 20px;
 `;
 const LogoImage = styled.img`
-	width: 170px; /* Adjust the width as needed */
+	width: 170px;
+	height: 60px;
+	object-fit: cover;
 `;
 
 const NavigationRight = styled(NavigationBar)`
@@ -50,7 +61,6 @@ const NavigationRight = styled(NavigationBar)`
 
 const NavItem = styled(Link)`
 	font-size: 14px; /* Slightly smaller font size */
-	/* color: rgba(255, 255, 255, 0.6); */
 	color: black;
 	text-decoration: none;
 	margin-left: 30px; /* Reduced margin */

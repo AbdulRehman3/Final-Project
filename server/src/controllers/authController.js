@@ -48,7 +48,7 @@ exports.signin = (req, res) => {
 			}
 			bcrypt.compare(password, user.password, (err, isPasswordValid) => {
 				if (err) {
-					return res.status(500).json({ error: err.message });
+					return res.status(500).json({ message: err.message });
 				}
 
 				if (!isPasswordValid) {
