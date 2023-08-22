@@ -1,5 +1,6 @@
 const Order = require('../models/Order');
 const Food = require('../models/Food');
+const emailHelper = require('../utils/emailHelper');
 
 // Sign up controller
 exports.createOrder = (req, res) => {
@@ -20,8 +21,14 @@ exports.createOrder = (req, res) => {
 
 			// Update the Food document to make food Unavilable
 			Food.updateOne({ _id: food }, { isAvailable: false })
-				.then((updateResult) => {
+				.then((updatedResult) => {
 					// Send Email Confirmation
+					emailHelper.sendOrderConfirmationEmail({
+						fullname,
+						email,
+						total,
+						orderDateTime: result.createdAt,
+					});
 
 					return res.status(201).json({
 						message: 'Your order has been placed successfully',
