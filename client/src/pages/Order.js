@@ -7,6 +7,7 @@ import { foodByIdService } from '../apis/foodsApi';
 import LoadingSpinner from '../components/Loader';
 import { EMAILREGEX } from '../utils/constants';
 import ErrorMessage from '../components/forms/FormError';
+import { createOrderService } from '../apis/ordersApi';
 
 const Order = () => {
 	const { token, user } = useAuth();
@@ -41,6 +42,41 @@ const Order = () => {
 		return validationError;
 	};
 
+	const createOrder = () => {
+		const orderData = {
+			fullname,
+			email,
+			address1,
+			address2,
+			total: foodData.price,
+			food: foodData._id,
+		};
+		createOrderService(orderData, token)
+			.then((result) => {
+				result
+					.json()
+					.then((data) => {
+						// Navigate to the Order Confirmation Page
+						if (result.ok) {
+							navigate(`/confirmation/${data.orderId}`);
+						} else {
+							setErrorMessage(data.error);
+						}
+					})
+					.catch((err) => {
+						console.error('FAILED', err);
+						setErrorMessage(err.error);
+					});
+			})
+			.catch((error) => {
+				console.error('ERROR:', error);
+				setErrorMessage(error.message || 'Failed to add posting, please retry');
+			})
+			.finally(() => {
+				setIsFormSubmitting(false);
+			});
+	};
+
 	const onSubmitForm = () => {
 		setIsFormSubmitting(true);
 		setErrorMessage('');
@@ -55,6 +91,7 @@ const Order = () => {
 		}
 
 		// Call the respective service function and process result
+		createOrder();
 	};
 
 	const loadFoodData = () => {

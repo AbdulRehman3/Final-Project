@@ -3,6 +3,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const optionalAuthMiddleware = require('../middlewares/optionalAuthMiddleware');
 const authController = require('../controllers/authController');
 const foodController = require('../controllers/foodController');
+const ordersController = require('../controllers/ordersController');
 
 // Test route, for testing the API connection
 router.get('/hello', (req, res) => {
@@ -32,5 +33,9 @@ router.get(
 	optionalAuthMiddleware,
 	foodController.getFoodDetailById
 );
+
+// Orders endpoints
+router.post('/orders', authMiddleware, ordersController.createOrder);
+router.get('/orders/:id', authMiddleware, ordersController.getOrderDetailById);
 
 module.exports = router;
